@@ -10,12 +10,14 @@
 This template is designed to build a blog from the "Rails new" command. You can read more about templates [here](https://guides.rubyonrails.org/rails_application_templates.html). You can use this template in a already existing app or to build a new. I would recommend using Rails 8.0.2 or up and Ruby 3.3.0 or up. You should also have FFmpeg and LibVips. Node 18 or up is handy, not required. To use the commands below just run them in the appropriate environment.
 
 **Existing App**
-
+```bash
 bin/rails app:template LOCATION=https://raw.githubusercontent.com/Developer3027/rails8-template-basic-blog/refs/heads/main/main-template.rb
+```
 
 **New Application**
-
+```bash
 rails new my-app -d postgresql -c tailwind -m https://raw.githubusercontent.com/Developer3027/rails8-template-basic-blog/refs/heads/main/main-template.rb
+```
 
 Listed below are the features for this template:
 
