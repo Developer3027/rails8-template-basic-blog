@@ -27,12 +27,12 @@ I built this template with the latest version of Rails, so it will check the ver
 
 * **Version Check** This template requires and will check for:
   * **Rails 8** Version 8.0.2. Newest version as of Jul 2025.
-  * **Ruby 3** Version 3.3.0 or higher.
-  * **FFmpeg** Need FFmpeg installed, not checking version.
-  * **LibVips** Need LibVips installed, not checking version.
+  * **Ruby 3** Version 3.3.0 or higher. Exit if lower.
+  * **FFmpeg** FFmpeg installed, not checking version. Ok if lower, show warning.
+  * **LibVips** LibVips installed, not checking version. Ok if lower, show warning.
   * **Node** Check for node and version 18 or higher. Ok if lower, show warning.
 
-If a required check fails, it will exit. If checks pass it will ask if you want to continue. Some checks are a more of a suggestion so it will present the information it gathered and ask you what to do.
+If a required check fails, it will exit. If checks pass it will ask if you want to continue. Some checks are more of a suggestion so it will present the information it gathered and ask you what to do.
 
 ## Backend
 
