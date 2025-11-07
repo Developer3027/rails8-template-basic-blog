@@ -1,93 +1,102 @@
-![Rails](https://img.shields.io/badge/rails-8.0.0-orange?logo=rubyonrails)
+![Rails](https://img.shields.io/badge/rails-8.1.0-orange?logo=rubyonrails)
 ![Ruby](https://img.shields.io/badge/ruby-3.3.0-red?logo=ruby)
-![Devise](https://img.shields.io/badge/auth-devise-purple?logo=rubyonrails)
+![Authentication](https://img.shields.io/badge/auth-devise-purple?logo=rubyonrails)
 ![Status](https://img.shields.io/badge/template-working-f46519?logo=rubyonrails)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Powered By](https://img.shields.io/badge/powered%20by-coffee-brown)
 
-# Rails 8 Template for Blog
+# Rails 8 Blog Template: Full-Featured Foundation
 
-This template is designed to build a blog from the "Rails new" command. You can read more about templates [here](https://guides.rubyonrails.org/rails_application_templates.html). You can use this template in a already existing app or to build a new. I would recommend using Rails 8.0.2 or up and Ruby 3.3.0 or up. You should also have FFmpeg and LibVips. Node 18 or up is handy, not required. To use the commands below just run them in the appropriate environment. This repo contains all the relevant files and folders. Currently this is built to run local so the template should be outside and beside the folder that contains all the files. The template will look for "blog-templates/sys-checks.rb" or "blog-templates/images/logo.svg". Change Directory (cd) into the directory (folder) containing the template and run either of these commands:
+This template provides a **ready-to-use foundation** for a modern blog, built entirely from a single `rails new` command. It focuses on setting up key backend features like authentication, content management, and rich media processing.
 
-**Existing App**
-```bash
-bin/rails app:template LOCATION=basic-blog-template.rb
-```
+## ⚠️ Important Status & Prerequisites
 
-**New Application**
+### Working Status
+**This template is currently built for local development only and is NOT production-ready.**
+
+* **Database:** Configured for local **PostgreSQL** with default settings.
+* **Completeness:** The template successfully sets up the database, models, controllers, and two view layouts. However, the **Admin CRUD (Create/Read/Update/Delete) views/forms for Posts are incomplete** and require manual coding to finish the admin UI/UX.
+
+### Prerequisites
+
+| Dependency | Minimum Version | Notes |
+| :--- | :--- | :--- |
+| **Rails** | **8.0.2** | The template will **exit** if a lower major version of Rails 8 is detected. |
+| **Ruby** | **3.3.0** | The template will **exit** if a lower version is detected. |
+| **FFmpeg** | Installed | Required by Active Storage for video processing. **Exit** if not found. |
+| **LibVips** | Installed | Required by Active Storage for image processing. **Exit** if not found. |
+| **Node.js** | 18+ | Recommended for Tailwind CSS. Installation will **warn** but not exit if a lower version is found. |
+
+---
+
+## 🚀 Usage
+
+You must ensure the template file (`basic-blog-template.rb`) is local and accessible. The template logic **assumes the directory structure** is as follows: `../blog-templates/` relative to the running template file.
+
+### 1. New Application
+
+Use the `-m` flag to specify the template file when creating a new application.
+
 ```bash
 rails new my-app -d postgresql -c tailwind -m basic-blog-template.rb
 ```
 
-Listed below are the features for this template:
+### 2. Existing Application
+Run the app:template command from the root of your existing Rails application.
 
-## Version Checks
+```bash
+bin/rails app:template LOCATION=path/to/basic-blog-template.rb
+```
 
-I built this template with the latest version of Rails, so it will check the version of Rails being used for install and exit if not Rails 8.0.2. I don't see why this would not run on version 8, need to modify the check. Doubt it will run on less as the template system is for 8. I check for at least Ruby version 3.3.0. I would not recommend using less. The blog uses Action Text and Active Storage. Active Storage will use FFmpeg and LibVips for video and image manipulation. These services are not set up in this template but the checks are made. It is not looking for versions, just install. If one is not found it will exit and provide a message on how to install. Node is not used specifically in this template but is handy for Rails apps, may even be required depending on your Tailwind needs. Will check for Node and version, looking for version 18, but will not exit if minor version found. Will warn if minor version found.
+## 💡 Template Features
+This template executes a series of tasks to configure the application environment and key features.
 
-* **Version Check** This template requires and will check for:
-  * **Rails 8** Version 8.0.2. Newest version as of Jul 2025.
-  * **Ruby 3** Version 3.3.0 or higher. Exit if lower.
-  * **FFmpeg** FFmpeg installed, not checking version. Ok if lower, show warning.
-  * **LibVips** LibVips installed, not checking version. Ok if lower, show warning.
-  * **Node** Check for node and version 18 or higher. Ok if lower, show warning.
+### Version Checks & System Integrity
+The template runs a strict pre-flight check to ensure the required versions of Rails and Ruby are present. It also confirms the presence of essential system dependencies (FFmpeg and LibVips) for Active Storage media processing. The template will gather system information and prompt the user before continuing.
 
-If a required check fails, it will exit. If checks pass it will ask if you want to continue. Some checks are more of a suggestion so it will present the information it gathered and ask you what to do.
+### Core Configuration
+- Gem Installation: Installs necessary gems as defined in the template.
+- Database: Deletes the default database.yml, replaces it with a PostgreSQL-focused configuration (using default PG credentials for localhost), and runs rails db:create.
+- Media: Installs Action Text (rich text) and Active Storage (file uploads).
+- Git Cleanup: Modifies .gitignore to exclude the bundle folder, optimizing repository size for development pushes (note: this may need modification for CI/CD pipelines).
 
-## Template Logic
+### Authentication & Admin
+- Devise Setup: Integrates Devise for secure user authentication.
+- Admin Model: Generates the Admin model (with fields like name, handle, and avatar association).
+- User Seeding: Prompts the user in the terminal for the initial Admin credentials (email/password) and seeds the database with the first user. The initial admin avatar is set using a copied asset.
 
-The following describes what the template will complete to create the blog. Once complete you cd into the project and run `bin/dev`. It will use the files and images located in the blog-templates folder.
+### Blog Content & Structure
+- Post Model: Generates the Post model, including fields for title, subtitle, rich content, featured status (boolean), and published_at (for drafting/scheduling). Each Post belongs to an Admin and has an associated cover image.
+- Post Controllers: Creates two controllers:
+  - Admin::PostsController: Secured for CRUD actions (requires login).
+  - PostsController: Public-facing for index and show actions.
+- Routes: Configures the public root to be posts#index.
+- Seeding: Seeds the database with a featured article and several general articles, including cover images and meta-data, for a solid initial view.
 
-### Configuration
+### Frontend & UI
+- Dual Layouts: Implements application controller logic to switch layouts:
+  - Public Layout: Simple header for visitors.
+  - Admin Layout: Includes a sidebar navigation for the dashboard.
+- Views: Provides polished views for the public-facing index (featured card, article cards) and the admin dashboard. Devise views are also generated.
 
-* Install any gems needed by the app.
-* Remove the database config and create the new one. I prefer a more general setup for PostgreSQL on localhost that uses the default pg username and password. This is the default standard for pg. Feel free to change it. Create the new database.
-* Install Action Text and Active Storage.
-* Modify the gitignore to include the bundle folder. This greatly reduces the git push to github. This can cause issues with github actions. If there is a issue, modify the workflow to call bundle after grabbing the code.
+## 🛑 Known Limitations (Roadmap)
+- Incomplete Admin UI/UX: The secure forms and view links needed to perform CRUD operations on posts in the Admin Dashboard are not yet implemented.
+- No Testing: The generated application does not include any tests.
+- Production Readiness: Lacks necessary environment variables, production security settings, and deployment configuration.
+- Optimization: Initial code may need optimization for database efficiency and modularity.
 
-### Asset Pipeline
+## 📸 Screenshots
+### Home Screen
+The initial view of the home screen after running bin/dev.
 
-Images used in the initial build need to be available in the asset pipeline. The cover images for articles, profile avatar or other images need to be copied over. Do this early so any seed operations or generations will have access.
+![Home View](index.png)
 
-### Admin with Devise
+### Featured Article
+Clicking the featured article card opens the seeded article view.
 
-Use devise to create the admin for the site. The template will set up devise and create the admin. Admin will include fields like name, handle, and avatar plus others. Once the model, controllers are created, modified, and routes modified, ask for admin information from the user, in the terminal. Use that information to seed the admin and create it. Use the avatar copied earlier to seed the active storage association.
+![Featured Article](featured.png)
 
-### Duel layouts
-
-Layouts checker in application controller. If admin is logged in the root will be the dashboard. Auth checked in routes and admin controller, if not admin the root will be post index. The view/layouts folder contains the application.html.erb which is the layout for root of the app. The normal application root will have a typical header. The admin dashboard will have a sidebar.
-
-### Post Model
-
-Generate the post model. This model is for the articles. It includes title, subtitle, content, featured, and published_at. The featured flag is a boolean to show a featured article at the top of the blog. Published_at is used to create scopes for the admin so they can set articles to various status of draft, published or scheduled. Admin will need to be referenced. Each article is written by a admin. Each article has a image.
-
-### Generate admin and public post controllers
-
-Admin post controller is secured and includes CRUD actions. Public post controller include index and show actions presenting post variables for each. Modify routes for the public root to _post#index_
-
-### Seeding
-
-Various articles need to be seeded. One feature and two more general articles. This will provide a solid blog index page when initially viewing the site. Include cover images copied earlier. Meta data from admin used.
-
-## Frontend
-
-There are two set of views. One for the admin and one for the public. The public root post page will have the header at the top, a featured article card and a article card. The dashboard will have a sidebar navigation. Devise views will be used.
-
-- **NOTE:** *This blog is incomplete and requires some rails experience to use in current state. The public and admin views look great. Reading articles or navigation is complete. Admin link to perform CRUD on posts is not in place. The admin posts controller is there but the secure form for admin is not.It is a great foundation for a blog and a wonderful example of the power of rails templates. This is all built from one command in minuets.*
-
-- **NOTE:** *This is not production ready and does not include testing. Admin UI/UX needs improvement. Auth view needs UI improvement. Code could be a bit more modular upon build completion. Database query concerns on time and efficiency should be addressed.*
-
-## Home Screen
-On running `bin/dev` on initial load, here is the initial view of the home screen:
-
-![Blog Home View](index.png)
-
-## Featured Article
-Clicking the featured article at the top opens the article. This has been seeded when running the template.
-
-![Featuted Article](featured.png)
-
-## Admin Dashboard
-On running the template you will be asked for the email and password for the admin. Sign in with those credentials to view the admin dashboard.
+### Admin Dashboard
+Sign in with the credentials provided during template execution to view the dashboard.
 
 ![Admin Dashboard](admin-dashboard.png)
