@@ -86,6 +86,7 @@ The template runs a strict pre-flight check to ensure the required versions of R
 - No Testing: The generated application does not include any tests.
 - Production Readiness: Lacks necessary environment variables, production security settings, and deployment configuration.
 - Optimization: Initial code may need optimization for database efficiency and modularity.
+- Built for NEW construction and does not check for Auth or models already in place.
 
 ## 📸 Screenshots
 ### Home Screen
