@@ -7,16 +7,16 @@
 
 # Rails 8 Template for Blog
 
-This template is designed to build a blog from the "Rails new" command. You can read more about templates [here](https://guides.rubyonrails.org/rails_application_templates.html). You can use this template in a already existing app or to build a new. I would recommend using Rails 8.0.2 or up and Ruby 3.3.0 or up. You should also have FFmpeg and LibVips. Node 18 or up is handy, not required. To use the commands below just run them in the appropriate environment.
+This template is designed to build a blog from the "Rails new" command. You can read more about templates [here](https://guides.rubyonrails.org/rails_application_templates.html). You can use this template in a already existing app or to build a new. I would recommend using Rails 8.0.2 or up and Ruby 3.3.0 or up. You should also have FFmpeg and LibVips. Node 18 or up is handy, not required. To use the commands below just run them in the appropriate environment. This repo contains all the relevant files and folders. Currently this is built to run local so the template should be outside and beside the folder that contains all the files. The template will look for "blog-templates/sys-checks.rb" or "blog-templates/images/logo.svg". Change Directory (cd) into the directory (folder) containing the template and run either of these commands:
 
 **Existing App**
 ```bash
-bin/rails app:template LOCATION=https://raw.githubusercontent.com/Developer3027/rails8-template-basic-blog/refs/heads/main/main-template.rb
+bin/rails app:template LOCATION=basic-blog-template.rb
 ```
 
 **New Application**
 ```bash
-rails new my-app -d postgresql -c tailwind -m https://raw.githubusercontent.com/Developer3027/rails8-template-basic-blog/refs/heads/main/main-template.rb
+rails new my-app -d postgresql -c tailwind -m basic-blog-template.rb
 ```
 
 Listed below are the features for this template:
@@ -34,7 +34,9 @@ I built this template with the latest version of Rails, so it will check the ver
 
 If a required check fails, it will exit. If checks pass it will ask if you want to continue. Some checks are more of a suggestion so it will present the information it gathered and ask you what to do.
 
-## Backend
+## Template Logic
+
+The following describes what the template will complete to create the blog. Once complete you cd into the project and run `bin/dev`. It will use the files and images located in the blog-templates folder.
 
 ### Configuration
 
@@ -49,13 +51,11 @@ Images used in the initial build need to be available in the asset pipeline. The
 
 ### Admin with Devise
 
-Use devise to create the admin for the site. The template will set up devise and create the admin. Admin will include fields like name, handle, and avatar plus others. Once the model, controllers are created, modified, and routes modified, ask for admin information from the user. Use that information to seed the admin and create it. Use the avatar copied earlier to seed the active storage association.
+Use devise to create the admin for the site. The template will set up devise and create the admin. Admin will include fields like name, handle, and avatar plus others. Once the model, controllers are created, modified, and routes modified, ask for admin information from the user, in the terminal. Use that information to seed the admin and create it. Use the avatar copied earlier to seed the active storage association.
 
-### Modify Application Controller
+### Duel layouts
 
-Add the layouts checker to controller. If admin is logged in the root will be the dashboard. If not the root will be post index. The view/layouts folder contains the application.html.erb which is the layout for root of the app. Will create another called admin for the root of the app if a admin is logged in. The normal application root will have a typical header. The admin dashboard will have a sidebar.
-
-_NOTE_ The admin can perform CRUD actions for the blog. The admin will manage the blog from a dashboard they log into. Anyone visiting the blog can view published articles. With this in mind, there may be a public controller and a admin controller for the same model.
+Layouts checker in application controller. If admin is logged in the root will be the dashboard. Auth checked in routes and admin controller, if not admin the root will be post index. The view/layouts folder contains the application.html.erb which is the layout for root of the app. The normal application root will have a typical header. The admin dashboard will have a sidebar.
 
 ### Post Model
 
@@ -67,8 +67,15 @@ Admin post controller is secured and includes CRUD actions. Public post controll
 
 ### Seeding
 
-Various articles need to be seeded. One feature and two more general articles. This will provide a solid blog page when initially viewing the site. Include cover images copied earlier. Meta data from admin used.
+Various articles need to be seeded. One feature and two more general articles. This will provide a solid blog index page when initially viewing the site. Include cover images copied earlier. Meta data from admin used.
 
 ## Frontend
 
 There are two set of views. One for the admin and one for the public. The public root post page will have the header at the top, a featured article card and a article card. The dashboard will have a sidebar navigation. Devise views will be used.
+
+- **NOTE:** *This blog is incomplete and requires some rails experience to use in current state. The public and admin views look great. Reading articles or navigation is complete. Admin link to perform CRUD on posts is not in place. The admin posts controller is there but the secure form for admin is not.It is a great foundation for a blog and a wonderful example of the power of rails templates. This is all built from one command in minuets.*
+
+## Home Screen
+On running `bin/dev` on initial load, here is the initial view of the home screen:
+
+![Blog Home View](index.png)
