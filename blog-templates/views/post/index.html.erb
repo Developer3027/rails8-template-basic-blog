@@ -1,0 +1,45 @@
+<section class="w-full pt-10 bg-slate-200 text-grey-900 rounded-md">
+  <div class="flex justify-center items-center">
+    <div class="flex flex-col max-w-4xl items-start">
+      <div class="flex justify-center w-full">
+
+        <div class="flex flex-wrap justify-center md:justify-evenly md:w-full px-4">
+
+          <div class="md:border-b-4 border-base-dark py-5 w-full">
+            <% if @featured_post %>
+              <%= render 'posts/partials/feature_card', featured_post:@featured_post %>
+            <% else %>
+              <%= render 'posts/partials/no_featured_card' %>
+            <% end %>
+          </div>
+
+          <div class="w-full flex justify-between p-1 bg-slate-50 border border-slate-800 mt-3 rounded">
+            <div class="flex">
+              <div class="px-2 hover:bg-slate-200 rounded cursor-pointer">Latest</div>
+              <div class="px-2 hover:bg-slate-200 rounded cursor-pointer">Top</div>
+            </div>
+            <div>
+              <!-- Search Icon -->
+              <button class="text-gray-500 hover:text-black focus:outline-none" aria-label="Search">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-8 w-full">
+            <% if @posts.any? %>
+              <%= render partial: 'posts/partials/post_card', collection: @posts, as: :post %>
+            <% else %>
+              <p>No other posts available at the moment.</p>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

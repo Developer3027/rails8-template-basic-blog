@@ -1,0 +1,19 @@
+<div class="flex flex-col justify-evenly items-center lg:flex-row w-96 md:w-full p-2 md:p-8 lg:px-16 rounded-md border border-input-background bg-slate-50">
+  <div class="flex justify-center m-1">
+    <%# Use a generic fallback image or your logo %>
+    <%= image_tag "logo.svg", class: "rounded-sm h-48 object-contain", alt: "Blog Logo" %>
+  </div>
+  <div class="flex flex-col max-w-[340px] m-1">
+    <%= link_to root_path do %>
+      <h2 class="font-bold px-1 py-2">What is this, why, what is going on here?!</h2>
+      <p class="pb-3 px-1">Welcome to the MILK-00 blog. This is a personal project of mine that I have been interested in for quite some time. This is several years in the making and...</p>
+      <div class="flex justify-between font-medium text-sm text-base-dark px-1">
+        <div class="flex flex-col">
+          <span>Author: Mason Roberts</span>
+          <span>Date: Mon, 15 Apr 2024</span>
+        </div>
+        <span>Category: General</span>
+      </div>
+    <% end %>
+  </div>
+</div>

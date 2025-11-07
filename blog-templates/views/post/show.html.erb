@@ -1,0 +1,40 @@
+<section class="w-full text-base-dark bg-slate-200 py-8 rounded-md">
+  <div class="max-w-[1024px] mx-auto px-4">
+    <div class="flex flex-col items-center bg-slate-50 rounded-md px-2 md:px-6">
+      <h1 class="font-bold text-lg md:text-xl p-4 text-center">
+        <%= @post.title %>
+      </h1>
+      <% if @post.image.present? %>
+        <%= image_tag @post.image, class: "rounded-md w-full max-h-[500px] object-cover" %>
+      <% end %>
+      <div class="flex flex-col md:flex-row justify-between w-full my-3 px-2">
+        <div class="flex flex-col justify-between font-medium w-full md:w-1/2 m-1 p-1">
+          <span>Author: <%= @post.admin.name %></span>
+          <span>Created: <%= @post.created_at.to_date.inspect %></span>
+        </div>
+        <div class="flex justify-start md:justify-end w-full md:w-1/2 font-medium m-1 p-1">
+          <span class="category-tag">Category: <%= @post.categories.first.category_name %></span>
+        </div>
+      </div>
+      <div class="px-2 md:px-6">
+        <%= @post.content %>
+      </div>
+      <div class="flex justify-center gap-4 py-2 my-2">
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= url_for([@post, {only_path: false}]) %>" target="_blank">
+          <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/shareArticle?url=<%= url_for([@post, {only_path: false}]) %>&title=<%= @post.title %>" target="_blank">
+          <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z" clip-rule="evenodd"/>
+            <path d="M7.2 8.809H4V19.5h3.2V8.809Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

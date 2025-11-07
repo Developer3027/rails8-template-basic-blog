@@ -75,7 +75,19 @@ There are two set of views. One for the admin and one for the public. The public
 
 - **NOTE:** *This blog is incomplete and requires some rails experience to use in current state. The public and admin views look great. Reading articles or navigation is complete. Admin link to perform CRUD on posts is not in place. The admin posts controller is there but the secure form for admin is not.It is a great foundation for a blog and a wonderful example of the power of rails templates. This is all built from one command in minuets.*
 
+- **NOTE:** *This is not production ready and does not include testing. Admin UI/UX needs improvement. Auth view needs UI improvement. Code could be a bit more modular upon build completion. Database query concerns on time and efficiency should be addressed.*
+
 ## Home Screen
 On running `bin/dev` on initial load, here is the initial view of the home screen:
 
 ![Blog Home View](index.png)
+
+## Featured Article
+Clicking the featured article at the top opens the article. This has been seeded when running the template.
+
+![Featuted Article](featured.png)
+
+## Admin Dashboard
+On running the template you will be asked for the email and password for the admin. Sign in with those credentials to view the admin dashboard.
+
+![Admin Dashboard](admin-dashboard.png)
