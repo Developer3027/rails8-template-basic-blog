@@ -48,6 +48,8 @@ Run the app:template command from the root of your existing Rails application.
 bin/rails app:template LOCATION=path/to/basic-blog-template.rb
 ```
 
+Once the template has run, you can remove the "blog-templates" folder and "basic-blog-template.rb".
+
 ## 💡 Template Features
 This template executes a series of tasks to configure the application environment and key features.
 
